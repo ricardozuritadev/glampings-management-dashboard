@@ -1,7 +1,16 @@
+import styled from "styled-components";
+
+const H1 = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+`;
+
 function App() {
     return (
         <>
-            <h1>Hello World</h1>
+            <H1>Hello World</H1>
         </>
     );
 }
