@@ -1,13 +1,11 @@
-import styled from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
-
-const H1 = styled.div``;
+import Heading from "@/ui/Heading";
 
 function App() {
     return (
         <>
             <GlobalStyles />
-            <H1>Hello World</H1>
+            <Heading as="h1">Hello World</Heading>
         </>
     );
 }
