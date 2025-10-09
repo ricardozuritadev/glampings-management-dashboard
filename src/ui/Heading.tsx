@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const H1 = styled.h1`
+const StyledHeading = styled.div<HeadingProps>`
     ${(props) =>
         props.as === "h1" &&
         css`
@@ -23,4 +23,15 @@ const H1 = styled.h1`
         `}
 `;
 
-export default H1;
+type HeadingProps = {
+    as?: "h1" | "h2" | "h3";
+    children: React.ReactNode;
+};
+
+export default function Heading({ as = "h1", children, ...props }: HeadingProps) {
+    return (
+        <StyledHeading as={as} {...props}>
+            {children}
+        </StyledHeading>
+    );
+}
