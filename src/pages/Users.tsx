@@ -1,7 +1,7 @@
-import { USERS } from "@/constants/pages/users.constants";
+import { PAGES } from "@/constants/pages.constatns";
 
 import Heading from "@/ui/Heading";
 
 export default function Users() {
-    return <Heading as="h1">{USERS.USERS}</Heading>;
+    return <Heading as="h1">{PAGES.USERS.HEADER}</Heading>;
 }

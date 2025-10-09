@@ -1,20 +1,19 @@
-import { ACCOUNT_PAGES } from "@/constants/pages/account.constants";
-
 import Row from "@/ui/Row";
 import Heading from "@/ui/Heading";
+import { PAGES } from "@/constants/pages.constatns";
 
 export default function Account() {
     return (
         <>
-            <Heading as="h1">{ACCOUNT_PAGES.UPDATE_ACCOUNT}</Heading>
+            <Heading as="h1">{PAGES.ACCOUNT.HEADER}</Heading>
 
             <Row>
-                <Heading as="h3">{ACCOUNT_PAGES.UPDATE_DATA}</Heading>
+                <Heading as="h3">{PAGES.ACCOUNT.UPDATE_DATA}</Heading>
                 <p>Formulario para actualizar los datos del usuario</p>
             </Row>
 
             <Row>
-                <Heading as="h3">{ACCOUNT_PAGES.UPDATE_PASSWORD}</Heading>
+                <Heading as="h3">{PAGES.ACCOUNT.UPDATE_PASSWORD}</Heading>
                 <p>Formulario para actualizar la contraseña</p>
             </Row>
         </>

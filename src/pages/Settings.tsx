@@ -1,7 +1,7 @@
-import { SETTINGS } from "@/constants/pages/settings.constants";
+import { PAGES } from "@/constants/pages.constatns";
 
 import Heading from "@/ui/Heading";
 
 export default function Settings() {
-    return <Heading>{SETTINGS.SETTINGS}</Heading>;
+    return <Heading>{PAGES.SETTINGS.HEADER}</Heading>;
 }

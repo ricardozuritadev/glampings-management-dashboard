@@ -1,4 +1,4 @@
-import { PAGE_NOT_FOUND } from "@/constants/pages/page-not-found.constants";
+import { PAGES } from "@/constants/pages.constatns";
 
 import Button from "@/ui/Button";
 import Heading from "@/ui/Heading";
@@ -34,7 +34,7 @@ export default function PageNotFound() {
     return (
         <StyledPageNotFound>
             <Box>
-                <Heading as="h1">{PAGE_NOT_FOUND.PAGE_NOT_FOUND}</Heading>
+                <Heading as="h1">{PAGES.PAGE_NOT_FOUND.HEADER}</Heading>
                 <Button onClick={() => console.log("Volver")} size="large">
                     &larr; Go back
                 </Button>

@@ -1,4 +1,4 @@
-import { LOGIN } from "@/constants/pages/login.constants";
+import { PAGES } from "@/constants/pages.constatns";
 
 import styled from "styled-components";
 
@@ -13,5 +13,5 @@ const LoginLayout = styled.main`
 `;
 
 export default function Login() {
-    return <LoginLayout>{LOGIN.LOGIN}</LoginLayout>;
+    return <LoginLayout>{PAGES.LOGIN.HEADER}</LoginLayout>;
 }

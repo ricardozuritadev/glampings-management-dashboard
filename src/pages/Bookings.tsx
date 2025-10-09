@@ -1,4 +1,4 @@
-import { BOOKINGS } from "@/constants/pages/bookings.constants";
+import { PAGES } from "@/constants/pages.constatns";
 
 import Heading from "@/ui/Heading";
 import Row from "@/ui/Row";
@@ -6,7 +6,7 @@ import Row from "@/ui/Row";
 export default function Bookings() {
     return (
         <Row type="horizontal">
-            <Heading as="h1">{BOOKINGS.BOOKINGS}</Heading>
+            <Heading as="h1">{PAGES.BOOKINGS.HEADER}</Heading>
             <p>TEST</p>
         </Row>
     );

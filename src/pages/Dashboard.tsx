@@ -1,4 +1,4 @@
-import { DASHBOARD } from "@/constants/pages/dashboard.constants";
+import { PAGES } from "@/constants/pages.constatns";
 
 import Heading from "@/ui/Heading";
 import Row from "@/ui/Row";
@@ -6,7 +6,7 @@ import Row from "@/ui/Row";
 export default function Dashboard() {
     return (
         <Row type="horizontal">
-            <Heading as="h1">{DASHBOARD.DASHBOARD}</Heading>
+            <Heading as="h1">{PAGES.DASHBOARD.HEADER}</Heading>
             <p>TEST</p>
         </Row>
     );
