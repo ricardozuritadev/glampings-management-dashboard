@@ -1,6 +1,6 @@
 import Row from "@/ui/Row";
 import Heading from "@/ui/Heading";
-import { PAGES } from "@/constants/pages.constatns";
+import { PAGES } from "@/constants/pages.constants";
 
 export default function Account() {
     return (

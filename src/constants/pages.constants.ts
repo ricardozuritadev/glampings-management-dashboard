@@ -1,4 +1,7 @@
 export const PAGES = {
+    HOME: {
+        HEADER: "Inicio"
+    },
     DASHBOARD: {
         HEADER: "Panel de Administración"
     },
@@ -6,7 +9,7 @@ export const PAGES = {
         HEADER: "Reservas"
     },
     ACCOUNT: {
-        HEADER: "Actualiza tu cuenta",
+        HEADER: "Cuenta",
         UPDATE_DATA: "Actualiza los datos del usuario",
         UPDATE_PASSWORD: "Actualiza la contraseña"
     },

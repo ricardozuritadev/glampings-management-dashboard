@@ -23,7 +23,7 @@ export default function App() {
                         <Route index element={<Navigate to={PATHS.DASHBOARD} />} />
                         <Route path={PATHS.DASHBOARD} element={<Dashboard />} />
                         <Route path={PATHS.BOOKINGS} element={<Bookings />} />
-                        <Route path={PATHS.CABINS} element={<Glampings />} />
+                        <Route path={PATHS.GLAMPINGS} element={<Glampings />} />
                         <Route path={PATHS.USERS} element={<Users />} />
                         <Route path={PATHS.SETTINGS} element={<Settings />} />
                         <Route path={PATHS.ACCOUNT} element={<Account />} />

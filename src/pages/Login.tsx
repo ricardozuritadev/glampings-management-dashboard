@@ -1,4 +1,4 @@
-import { PAGES } from "@/constants/pages.constatns";
+import { PAGES } from "@/constants/pages.constants";
 
 import styled from "styled-components";
 

@@ -2,7 +2,14 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import { PATHS } from "@/constants/paths.constants";
-import { PAGES } from "@/constants/pages.constatns";
+import { PAGES } from "@/constants/pages.constants";
+import {
+    HiOutlineCalendarDays,
+    HiOutlineCog6Tooth,
+    HiOutlineHome,
+    HiOutlineHomeModern,
+    HiOutlineUsers
+} from "react-icons/hi2";
 
 const NavList = styled.ul`
     display: flex;
@@ -10,7 +17,7 @@ const NavList = styled.ul`
     gap: 0.8rem;
 `;
 
-const Link = styled.a`
+const StyledNavLink = styled(NavLink)`
     &:link,
     &:visited {
         display: flex;
@@ -52,10 +59,34 @@ export default function MainNav() {
     return (
         <NavList>
             <li>
-                <NavLink to={PATHS.DASHBOARD}>{PAGES.DASHBOARD.HEADER}</NavLink>
+                <StyledNavLink to={PATHS.DASHBOARD}>
+                    <HiOutlineHome />
+                    <span>{PAGES.HOME.HEADER}</span>
+                </StyledNavLink>
             </li>
             <li>
-                <NavLink to={PATHS.BOOKINGS}>{PAGES.BOOKINGS.HEADER}</NavLink>
+                <StyledNavLink to={PATHS.BOOKINGS}>
+                    <HiOutlineCalendarDays />
+                    <span>{PAGES.BOOKINGS.HEADER}</span>
+                </StyledNavLink>
+            </li>
+            <li>
+                <StyledNavLink to={PATHS.GLAMPINGS}>
+                    <HiOutlineHomeModern />
+                    <span>{PAGES.GLAMPINGS.HEADER}</span>
+                </StyledNavLink>
+            </li>
+            <li>
+                <StyledNavLink to={PATHS.USERS}>
+                    <HiOutlineUsers />
+                    <span>{PAGES.USERS.HEADER}</span>
+                </StyledNavLink>
+            </li>
+            <li>
+                <StyledNavLink to={PATHS.SETTINGS}>
+                    <HiOutlineCog6Tooth />
+                    <span>{PAGES.SETTINGS.HEADER}</span>
+                </StyledNavLink>
             </li>
         </NavList>
     );
