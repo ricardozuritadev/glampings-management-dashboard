@@ -1,3 +1,44 @@
+import { PAGE_NOT_FOUND } from "@/constants/pages/page-not-found.constants";
+
+import Button from "@/ui/Button";
+import Heading from "@/ui/Heading";
+import styled from "styled-components";
+
+const StyledPageNotFound = styled.main`
+    height: 100vh;
+    background-color: var(--color-grey-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4.8rem;
+`;
+
+const Box = styled.div`
+    /* box */
+    background-color: var(--color-grey-0);
+    border: 1px solid var(--color-grey-100);
+    border-radius: var(--border-radius-md);
+
+    padding: 4.8rem;
+    flex: 0 1 96rem;
+    text-align: center;
+
+    & h1 {
+        margin-bottom: 3.2rem;
+    }
+`;
+
 export default function PageNotFound() {
-    return <div>PageNotFound</div>;
+    //   const moveBack = useMoveBack();
+
+    return (
+        <StyledPageNotFound>
+            <Box>
+                <Heading as="h1">{PAGE_NOT_FOUND.PAGE_NOT_FOUND}</Heading>
+                <Button onClick={() => console.log("Volver")} size="large">
+                    &larr; Go back
+                </Button>
+            </Box>
+        </StyledPageNotFound>
+    );
 }
