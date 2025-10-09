@@ -1,7 +1,7 @@
 export const PATHS = {
     DASHBOARD: "dashboard",
     BOOKINGS: "bookings",
-    CABINS: "cabins",
+    CABINS: "glampings",
     USERS: "users",
     SETTINGS: "settings",
     ACCOUNT: "account",
