@@ -35,7 +35,7 @@ export default function GlampingTable() {
         isPending,
         error
     } = useQuery({
-        queryKey: ["glamping"],
+        queryKey: ["glampings"],
         queryFn: getGlampings
     });
 

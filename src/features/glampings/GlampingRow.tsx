@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 import { formatCurrency, pluralize } from "@/utils/helpers";
 import type { Glamping } from "@/types/features/glamping.types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteGlamping } from "@/services/apiGlampings";
 
 const TableRow = styled.div`
     display: grid;
@@ -45,17 +47,33 @@ type CabinRowProps = {
 };
 
 export default function GlampingRow({ glamping }: CabinRowProps) {
+    const { id, image, name, maxCapacity, weekdayPrice, fridayPrice, saturdayPrice } = glamping;
+
+    const queryClient = useQueryClient();
+
+    const { isPending: isDeleting, mutate } = useMutation({
+        mutationFn: deleteGlamping,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["glampings"] });
+        },
+        onError: (error) => {
+            console.error(error.message);
+        }
+    });
+
     return (
         <TableRow role="row">
-            <Img src={glamping.image || ""} alt={glamping.name || ""} />
-            <GlampingName>{glamping.name}</GlampingName>
+            <Img src={image || ""} alt="Glamping" />
+            <GlampingName>{name}</GlampingName>
             <Capacity>
-                Hasta <b>{glamping.maxCapacity}</b> {pluralize(glamping.maxCapacity, "persona")}
+                Hasta <b>{maxCapacity}</b> {pluralize(maxCapacity, "persona")}
             </Capacity>
-            <Price>{formatCurrency(glamping.weekdayPrice || 0)}</Price>
-            <Price>{formatCurrency(glamping.fridayPrice || 0)}</Price>
-            <Price>{formatCurrency(glamping.saturdayPrice || 0)}</Price>
-            <button>Eliminar</button>
+            <Price>{formatCurrency(weekdayPrice || 0)}</Price>
+            <Price>{formatCurrency(fridayPrice || 0)}</Price>
+            <Price>{formatCurrency(saturdayPrice || 0)}</Price>
+            <button onClick={() => mutate(id)} disabled={isDeleting}>
+                Eliminar
+            </button>
         </TableRow>
     );
 }
