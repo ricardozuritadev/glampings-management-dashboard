@@ -106,32 +106,38 @@ export type Database = {
                 Row: {
                     created_at: string;
                     description: string | null;
-                    discount: number | null;
+                    fridayPrice: number | null;
                     id: number;
                     image: string | null;
                     maxCapacity: number | null;
                     name: string | null;
-                    regularPrice: number | null;
+                    saturdayPrice: number | null;
+                    weekdayDiscount: boolean | null;
+                    weekdayPrice: number | null;
                 };
                 Insert: {
                     created_at?: string;
                     description?: string | null;
-                    discount?: number | null;
+                    fridayPrice?: number | null;
                     id?: number;
                     image?: string | null;
                     maxCapacity?: number | null;
                     name?: string | null;
-                    regularPrice?: number | null;
+                    saturdayPrice?: number | null;
+                    weekdayDiscount?: boolean | null;
+                    weekdayPrice?: number | null;
                 };
                 Update: {
                     created_at?: string;
                     description?: string | null;
-                    discount?: number | null;
+                    fridayPrice?: number | null;
                     id?: number;
                     image?: string | null;
                     maxCapacity?: number | null;
                     name?: string | null;
-                    regularPrice?: number | null;
+                    saturdayPrice?: number | null;
+                    weekdayDiscount?: boolean | null;
+                    weekdayPrice?: number | null;
                 };
                 Relationships: [];
             };
