@@ -5,8 +5,17 @@ export async function getGlampings() {
 
     if (error) {
         console.error(error.message);
-        throw new Error("Failed to fetch glampings");
+        throw new Error("Error al obtener los glampings");
     }
 
     return data;
+}
+
+export async function deleteGlamping(id: number) {
+    const { error } = await supabase.from("glampings").delete().eq("id", id);
+
+    if (error) {
+        console.error(error.message);
+        throw new Error("Error al eliminar el glamping");
+    }
 }
