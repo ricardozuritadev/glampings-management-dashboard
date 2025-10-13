@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { deleteGlamping } from "@/services/apiGlampings";
 import { formatCurrency, pluralize } from "@/utils/helpers";
 import type { Glamping } from "@/types/features/glamping.types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteGlamping } from "@/services/apiGlampings";
 
 const TableRow = styled.div`
     display: grid;
@@ -54,10 +55,11 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
     const { isPending: isDeleting, mutate } = useMutation({
         mutationFn: deleteGlamping,
         onSuccess: () => {
+            toast.success("Glamping eliminado correctamente");
             queryClient.invalidateQueries({ queryKey: ["glampings"] });
         },
         onError: (error) => {
-            console.error(error.message);
+            toast.error(error.message);
         }
     });
 
