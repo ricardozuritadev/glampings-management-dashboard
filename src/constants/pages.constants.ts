@@ -20,7 +20,26 @@ export const PAGES = {
         HEADER: "Configuración"
     },
     GLAMPINGS: {
-        HEADER: "Glampings"
+        HEADER: "Glampings",
+        TABLE: {
+            HEADER: "Nombre",
+            CAPACITY: "Capacidad",
+            WEEKDAY_PRICE: "Precio entre semana",
+            FRIDAY_PRICE: "Precio Viernes",
+            SATURDAY_PRICE: "Precio Sábado"
+        },
+        ADD_GLAMPING: "Añadir glamping",
+        FORM: {
+            NAME: "Nombre del glamping",
+            CAPACITY: "Capacidad máxima",
+            WEEKDAY_PRICE: "Precio entre semana",
+            FRIDAY_PRICE: "Precio Viernes",
+            SATURDAY_PRICE: "Precio Sábado",
+            DESCRIPTION: "Descripción",
+            IMAGE: "Imagen del glamping",
+            CANCEL: "Cancelar",
+            EDIT: "Editar"
+        }
     },
     LOGIN: {
         HEADER: "Iniciar sesión"

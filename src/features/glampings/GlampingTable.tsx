@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 
+import { PAGES } from "@/constants/pages.constants";
 import { getGlampings } from "@/services/apiGlampings";
 
 import Spinner from "@/ui/Spinner";
@@ -45,11 +46,11 @@ export default function GlampingTable() {
         <Table role="table">
             <TableHeader role="row">
                 <div></div>
-                <div>Glamping</div>
-                <div>Capacidad</div>
-                <div>Precio entre semana</div>
-                <div>Precio Viernes</div>
-                <div>Precio Sábado</div>
+                <div>{PAGES.GLAMPINGS.TABLE.HEADER}</div>
+                <div>{PAGES.GLAMPINGS.TABLE.CAPACITY}</div>
+                <div>{PAGES.GLAMPINGS.TABLE.WEEKDAY_PRICE}</div>
+                <div>{PAGES.GLAMPINGS.TABLE.FRIDAY_PRICE}</div>
+                <div>{PAGES.GLAMPINGS.TABLE.SATURDAY_PRICE}</div>
             </TableHeader>
 
             {glampings?.map((glamping) => (
