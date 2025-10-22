@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
+import toast from "react-hot-toast";
 import { useForm, type FieldValues } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { PAGES } from "@/constants/pages.constants";
+import { createGlamping } from "@/services/apiGlampings";
+import type { Glamping } from "@/types/features/glamping.types";
 
 import Button from "@/ui/Button";
 import Form from "@/ui/Form";
@@ -47,10 +51,23 @@ const Error = styled.span`
 `;
 
 function CreateGlampingForm() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+    const queryClient = useQueryClient();
+
+    const { mutate, isPending: isCreating } = useMutation({
+        mutationFn: createGlamping,
+        onSuccess: () => {
+            toast.success("Glamping creado correctamente");
+            queryClient.invalidateQueries({ queryKey: ["glampings"] });
+            reset();
+        },
+        onError: (error) => {
+            toast.error(error.message);
+        }
+    });
 
     function onSubmit(data: FieldValues) {
-        console.log(data);
+        mutate(data as Glamping);
     }
 
     return (
@@ -100,7 +117,8 @@ function CreateGlampingForm() {
                 <Button variation="secondary" type="reset">
                     {PAGES.GLAMPINGS.FORM.CANCEL}
                 </Button>
-                <Button>{PAGES.GLAMPINGS.FORM.EDIT}</Button>
+
+                <Button disabled={isCreating}>{PAGES.GLAMPINGS.FORM.EDIT}</Button>
             </FormRow>
         </Form>
     );
