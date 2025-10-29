@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import toast from "react-hot-toast";
 import { useForm, type FieldValues } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -13,45 +11,11 @@ import Form from "@/ui/Form";
 import FileInput from "@/ui/FileInput";
 import Input from "@/ui/Input";
 import Textarea from "@/ui/Textarea";
-
-const FormRow = styled.div`
-    display: grid;
-    align-items: center;
-    grid-template-columns: 24rem 1fr 1.2fr;
-    gap: 2.4rem;
-
-    padding: 1.2rem 0;
-
-    &:first-child {
-        padding-top: 0;
-    }
-
-    &:last-child {
-        padding-bottom: 0;
-    }
-
-    &:not(:last-child) {
-        border-bottom: 1px solid var(--color-grey-100);
-    }
-
-    &:has(button) {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1.2rem;
-    }
-`;
-
-const Label = styled.label`
-    font-weight: 500;
-`;
-
-const Error = styled.span`
-    font-size: 1.4rem;
-    color: var(--color-red-700);
-`;
+import FormRow from "@/ui/FormRow";
 
 function CreateGlampingForm() {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState } = useForm();
+    const { errors } = formState;
     const queryClient = useQueryClient();
 
     const { mutate, isPending: isCreating } = useMutation({
@@ -72,44 +36,92 @@ function CreateGlampingForm() {
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <FormRow>
-                <Label htmlFor="name">{PAGES.GLAMPINGS.FORM.NAME}</Label>
-                <Input type="text" id="name" {...register("name")} />
+            <FormRow label={PAGES.GLAMPINGS.FORM.NAME} errors={errors}>
+                <Input
+                    type="text"
+                    id="name"
+                    disabled={isCreating}
+                    {...register("name", { required: "Este campo es requerido" })}
+                />
             </FormRow>
 
-            <FormRow>
-                <Label htmlFor="maxCapacity">{PAGES.GLAMPINGS.FORM.CAPACITY}</Label>
+            <FormRow label={PAGES.GLAMPINGS.FORM.CAPACITY} errors={errors}>
                 <Input
                     type="number"
                     id="maxCapacity"
                     defaultValue={4}
-                    {...register("maxCapacity")}
+                    disabled={isCreating}
+                    {...register("maxCapacity", {
+                        required: "Este campo es requerido",
+                        min: {
+                            value: 1,
+                            message: "El valor mínimo es 1"
+                        }
+                    })}
                 />
             </FormRow>
 
-            <FormRow>
-                <Label htmlFor="weekdayPrice">{PAGES.GLAMPINGS.FORM.WEEKDAY_PRICE}</Label>
-                <Input type="number" id="weekdayPrice" {...register("weekdayPrice")} />
+            <FormRow label={PAGES.GLAMPINGS.FORM.WEEKDAY_PRICE} errors={errors}>
+                <Input
+                    type="number"
+                    id="weekdayPrice"
+                    disabled={isCreating}
+                    {...register("weekdayPrice", {
+                        required: "Este campo es requerido",
+                        min: {
+                            value: 0,
+                            message: "El valor mínimo es 0"
+                        }
+                    })}
+                />
             </FormRow>
 
-            <FormRow>
-                <Label htmlFor="fridayPrice">{PAGES.GLAMPINGS.FORM.FRIDAY_PRICE}</Label>
-                <Input type="number" id="fridayPrice" {...register("fridayPrice")} />
+            <FormRow label={PAGES.GLAMPINGS.FORM.FRIDAY_PRICE} errors={errors}>
+                <Input
+                    type="number"
+                    id="fridayPrice"
+                    disabled={isCreating}
+                    {...register("fridayPrice", {
+                        required: "Este campo es requerido",
+                        min: {
+                            value: 0,
+                            message: "El valor mínimo es 0"
+                        }
+                    })}
+                />
             </FormRow>
 
-            <FormRow>
-                <Label htmlFor="saturdayPrice">{PAGES.GLAMPINGS.FORM.SATURDAY_PRICE}</Label>
-                <Input type="number" id="saturdayPrice" {...register("saturdayPrice")} />
+            <FormRow label={PAGES.GLAMPINGS.FORM.SATURDAY_PRICE} errors={errors}>
+                <Input
+                    type="number"
+                    id="saturdayPrice"
+                    disabled={isCreating}
+                    {...register("saturdayPrice", {
+                        required: "Este campo es requerido",
+                        min: {
+                            value: 0,
+                            message: "El valor mínimo es 0"
+                        }
+                    })}
+                />
             </FormRow>
 
-            <FormRow>
-                <Label htmlFor="description">{PAGES.GLAMPINGS.FORM.DESCRIPTION}</Label>
-                <Textarea id="description" defaultValue="" {...register("description")} />
+            <FormRow label={PAGES.GLAMPINGS.FORM.DESCRIPTION} errors={errors}>
+                <Textarea
+                    id="description"
+                    defaultValue=""
+                    disabled={isCreating}
+                    {...register("description", { required: "Este campo es requerido" })}
+                />
             </FormRow>
 
-            <FormRow>
-                <Label htmlFor="image">{PAGES.GLAMPINGS.FORM.IMAGE}</Label>
-                <FileInput id="image" accept="image/*" {...register("image")} />
+            <FormRow label={PAGES.GLAMPINGS.FORM.IMAGE} errors={errors}>
+                <FileInput
+                    id="image"
+                    accept="image/*"
+                    disabled={isCreating}
+                    {...register("image", { required: "Este campo es requerido" })}
+                />
             </FormRow>
 
             <FormRow>
