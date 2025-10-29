@@ -31,7 +31,7 @@ function CreateGlampingForm() {
     });
 
     function onSubmit(data: FieldValues) {
-        mutate(data as Glamping);
+        mutate({ ...data, image: data.image[0] } as Glamping);
     }
 
     return (
@@ -119,6 +119,7 @@ function CreateGlampingForm() {
                 <FileInput
                     id="image"
                     accept="image/*"
+                    type="file"
                     disabled={isCreating}
                     {...register("image", { required: "Este campo es requerido" })}
                 />
@@ -130,7 +131,7 @@ function CreateGlampingForm() {
                     {PAGES.GLAMPINGS.FORM.CANCEL}
                 </Button>
 
-                <Button disabled={isCreating}>{PAGES.GLAMPINGS.FORM.EDIT}</Button>
+                <Button disabled={isCreating}>{PAGES.GLAMPINGS.ADD_GLAMPING}</Button>
             </FormRow>
         </Form>
     );
