@@ -1,12 +1,14 @@
-import type { Glamping } from "@/types/features/glamping.types";
 import supabase from "./supabase";
+
+import { PAGES } from "@/constants/pages.constants";
+import type { Glamping } from "@/types/features/glamping.types";
 
 export async function getGlampings() {
     const { data, error } = await supabase.from("glampings").select("*");
 
     if (error) {
         console.error(error.message);
-        throw new Error("Error al obtener los glampings");
+        throw new Error(PAGES.GLAMPINGS.TOASTS.ERROR_GET);
     }
 
     return data;
@@ -17,7 +19,7 @@ export async function deleteGlamping(id: number) {
 
     if (error) {
         console.error(error.message);
-        throw new Error("Error al eliminar el glamping");
+        throw new Error(PAGES.GLAMPINGS.TOASTS.ERROR_DELETE);
     }
 }
 
@@ -44,7 +46,7 @@ export async function createGlamping(
 
     if (error) {
         console.error(error.message);
-        throw new Error("Error al crear el glamping");
+        throw new Error(PAGES.GLAMPINGS.TOASTS.ERROR);
     }
 
     if (imageName && newGlamping.image instanceof File) {
@@ -57,7 +59,7 @@ export async function createGlamping(
             const insertedId = Array.isArray(data) && data.length > 0 ? data[0].id : undefined;
             if (insertedId !== undefined) {
                 await supabase.from("glampings").delete().eq("id", insertedId);
-                throw new Error("Error al subir la imagen");
+                throw new Error(PAGES.GLAMPINGS.TOASTS.ERROR_UPLOAD_IMAGE);
             }
         }
     }

@@ -21,12 +21,12 @@ function CreateGlampingForm() {
     const { mutate, isPending: isCreating } = useMutation({
         mutationFn: createGlamping,
         onSuccess: () => {
-            toast.success("Glamping creado correctamente");
+            toast.success(PAGES.GLAMPINGS.TOASTS.CREATED);
             queryClient.invalidateQueries({ queryKey: ["glampings"] });
             reset();
         },
-        onError: (error) => {
-            toast.error(error.message);
+        onError: () => {
+            toast.error(PAGES.GLAMPINGS.TOASTS.ERROR);
         }
     });
 
@@ -41,7 +41,7 @@ function CreateGlampingForm() {
                     type="text"
                     id="name"
                     disabled={isCreating}
-                    {...register("name", { required: "Este campo es requerido" })}
+                    {...register("name", { required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED })}
                 />
             </FormRow>
 
@@ -52,10 +52,10 @@ function CreateGlampingForm() {
                     defaultValue={4}
                     disabled={isCreating}
                     {...register("maxCapacity", {
-                        required: "Este campo es requerido",
+                        required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED,
                         min: {
                             value: 1,
-                            message: "El valor mínimo es 1"
+                            message: PAGES.GLAMPINGS.FORM.VALIDATIONS.MIN.replace("{min}", "1")
                         }
                     })}
                 />
@@ -67,10 +67,10 @@ function CreateGlampingForm() {
                     id="weekdayPrice"
                     disabled={isCreating}
                     {...register("weekdayPrice", {
-                        required: "Este campo es requerido",
+                        required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED,
                         min: {
                             value: 0,
-                            message: "El valor mínimo es 0"
+                            message: PAGES.GLAMPINGS.FORM.VALIDATIONS.MIN.replace("{min}", "0")
                         }
                     })}
                 />
@@ -82,10 +82,10 @@ function CreateGlampingForm() {
                     id="fridayPrice"
                     disabled={isCreating}
                     {...register("fridayPrice", {
-                        required: "Este campo es requerido",
+                        required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED,
                         min: {
                             value: 0,
-                            message: "El valor mínimo es 0"
+                            message: PAGES.GLAMPINGS.FORM.VALIDATIONS.MIN.replace("{min}", "0")
                         }
                     })}
                 />
@@ -97,10 +97,10 @@ function CreateGlampingForm() {
                     id="saturdayPrice"
                     disabled={isCreating}
                     {...register("saturdayPrice", {
-                        required: "Este campo es requerido",
+                        required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED,
                         min: {
                             value: 0,
-                            message: "El valor mínimo es 0"
+                            message: PAGES.GLAMPINGS.FORM.VALIDATIONS.MIN.replace("{min}", "0")
                         }
                     })}
                 />
@@ -111,7 +111,9 @@ function CreateGlampingForm() {
                     id="description"
                     defaultValue=""
                     disabled={isCreating}
-                    {...register("description", { required: "Este campo es requerido" })}
+                    {...register("description", {
+                        required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED
+                    })}
                 />
             </FormRow>
 
@@ -121,7 +123,7 @@ function CreateGlampingForm() {
                     accept="image/*"
                     type="file"
                     disabled={isCreating}
-                    {...register("image", { required: "Este campo es requerido" })}
+                    {...register("image", { required: PAGES.GLAMPINGS.FORM.VALIDATIONS.REQUIRED })}
                 />
             </FormRow>
 
