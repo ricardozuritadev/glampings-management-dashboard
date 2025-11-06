@@ -8,6 +8,8 @@ import type { Glamping } from "@/types/features/glamping.types";
 
 import Row from "@/ui/Row";
 import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
+import { HiPencilSquare, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { useCreateGlamping } from "./useCreateGlamping";
 
 const TableRow = styled.div`
     display: grid;
@@ -51,11 +53,27 @@ type CabinRowProps = {
 };
 
 export default function GlampingRow({ glamping }: CabinRowProps) {
-    const { id, image, name, maxCapacity, weekdayPrice, fridayPrice, saturdayPrice } = glamping;
+    const { id, image, name, maxCapacity, weekdayPrice, fridayPrice, saturdayPrice, description } =
+        glamping;
 
     const [showForm, setShowForm] = useState<boolean>(false);
 
     const { isDeleting, deleteGlamping } = useDeleteGlamping();
+    const { isCreating, createGlamping } = useCreateGlamping();
+
+    function handleDuplicate() {
+        createGlamping({
+            glamping: {
+                name: `${name} - Copia`,
+                maxCapacity,
+                weekdayPrice,
+                fridayPrice,
+                saturdayPrice,
+                description,
+                image
+            } as Omit<Glamping, "image"> & { image: File | string | null }
+        });
+    }
 
     return (
         <>
@@ -70,10 +88,16 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
                 <Price>{formatCurrency(saturdayPrice || 0)}</Price>
 
                 <Row>
-                    <button onClick={() => setShowForm((show) => !show)}>Editar</button>
+                    <button onClick={handleDuplicate} disabled={isCreating}>
+                        <HiSquare2Stack />
+                    </button>
+
+                    <button onClick={() => setShowForm((show) => !show)}>
+                        <HiPencilSquare />
+                    </button>
 
                     <button onClick={() => deleteGlamping(id)} disabled={isDeleting}>
-                        Eliminar
+                        <HiTrash />
                     </button>
                 </Row>
             </TableRow>
