@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { useQuery } from "@tanstack/react-query";
+import { useGlampings } from "./useGlampings";
 
 import { PAGES } from "@/constants/pages.constants";
-import { getGlampings } from "@/services/apiGlampings";
 
 import Spinner from "@/ui/Spinner";
 import GlampingRow from "./GlampingRow";
@@ -31,14 +30,7 @@ const TableHeader = styled.header`
 `;
 
 export default function GlampingTable() {
-    const {
-        data: glampings,
-        isPending,
-        error
-    } = useQuery({
-        queryKey: ["glampings"],
-        queryFn: getGlampings
-    });
+    const { isPending, glampings } = useGlampings();
 
     if (isPending) return <Spinner />;
 

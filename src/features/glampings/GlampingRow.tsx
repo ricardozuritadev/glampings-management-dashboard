@@ -1,10 +1,13 @@
 import styled from "styled-components";
-import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { deleteGlamping } from "@/services/apiGlampings";
+import { useState } from "react";
+import { useDeleteGlamping } from "./useDeleteGlamping";
+
 import { formatCurrency, pluralize } from "@/utils/helpers";
 import type { Glamping } from "@/types/features/glamping.types";
+
+import Row from "@/ui/Row";
+import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
 
 const TableRow = styled.div`
     display: grid;
@@ -50,32 +53,34 @@ type CabinRowProps = {
 export default function GlampingRow({ glamping }: CabinRowProps) {
     const { id, image, name, maxCapacity, weekdayPrice, fridayPrice, saturdayPrice } = glamping;
 
-    const queryClient = useQueryClient();
+    const [showForm, setShowForm] = useState<boolean>(false);
 
-    const { isPending: isDeleting, mutate } = useMutation({
-        mutationFn: deleteGlamping,
-        onSuccess: () => {
-            toast.success("Glamping eliminado correctamente");
-            queryClient.invalidateQueries({ queryKey: ["glampings"] });
-        },
-        onError: (error) => {
-            toast.error(error.message);
-        }
-    });
+    const { isDeleting, deleteGlamping } = useDeleteGlamping();
 
     return (
-        <TableRow role="row">
-            <Img src={image || ""} alt="Glamping" />
-            <GlampingName>{name}</GlampingName>
-            <Capacity>
-                Hasta <b>{maxCapacity}</b> {pluralize(maxCapacity, "persona")}
-            </Capacity>
-            <Price>{formatCurrency(weekdayPrice || 0)}</Price>
-            <Price>{formatCurrency(fridayPrice || 0)}</Price>
-            <Price>{formatCurrency(saturdayPrice || 0)}</Price>
-            <button onClick={() => mutate(id)} disabled={isDeleting}>
-                Eliminar
-            </button>
-        </TableRow>
+        <>
+            <TableRow role="row">
+                <Img src={image || ""} alt="Glamping" />
+                <GlampingName>{name}</GlampingName>
+                <Capacity>
+                    Hasta <b>{maxCapacity}</b> {pluralize(maxCapacity, "persona")}
+                </Capacity>
+                <Price>{formatCurrency(weekdayPrice || 0)}</Price>
+                <Price>{formatCurrency(fridayPrice || 0)}</Price>
+                <Price>{formatCurrency(saturdayPrice || 0)}</Price>
+
+                <Row>
+                    <button onClick={() => setShowForm((show) => !show)}>Editar</button>
+
+                    <button onClick={() => deleteGlamping(id)} disabled={isDeleting}>
+                        Eliminar
+                    </button>
+                </Row>
+            </TableRow>
+
+            {showForm && (
+                <CreateOrEditGlampingForm glamping={glamping} onClose={() => setShowForm(false)} />
+            )}
+        </>
     );
 }
