@@ -17,7 +17,15 @@ export const PAGES = {
         HEADER: "Usuarios"
     },
     SETTINGS: {
-        HEADER: "Configuración"
+        HEADER: "Configuración",
+        TOASTS: {
+            ERROR_GET: "Ha ocurrido un error al obtener las configuraciones",
+            ERROR_UPDATE: "Ha ocurrido un error al actualizar las configuraciones",
+            UPDATED: "Configuraciones actualizadas correctamente"
+        },
+        MAX_BOOKING_LENGTH: "Máximo de días de reserva",
+        MAX_GUESTS_PER_BOOKING: "Máximo de huéspedes por reserva",
+        MIN_BOOKING_LENGTH: "Mínimo de días de reserva"
     },
     GLAMPINGS: {
         HEADER: "Glampings",
