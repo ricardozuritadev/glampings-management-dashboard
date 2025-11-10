@@ -5,7 +5,10 @@ import {
     createContext,
     isValidElement,
     useContext,
+    useEffect,
+    useRef,
     useState,
+    type KeyboardEvent,
     type MouseEvent,
     type ReactElement,
     type ReactNode
@@ -73,6 +76,8 @@ interface TriggerProps {
 interface ContentProps {
     children: ReactNode;
     name: string;
+    titleId?: string;
+    ariaLabel?: string;
 }
 
 type ModalContextType = {
@@ -131,11 +136,72 @@ function Trigger({ children, opens: openWindowName }: TriggerProps) {
     });
 }
 
-function Content({ children, name }: ContentProps) {
+function Content({ children, name, titleId, ariaLabel }: ContentProps) {
     const { openName, close } = useModal();
+
+    const modalRef = useRef<HTMLDivElement | null>(null);
+    const previouslyFocusedElement = useRef<HTMLElement | null>(null);
+
+    // Close the modal when the user presses the Escape key
+    useEffect(() => {
+        if (openName !== name) return;
+
+        const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+            if (event.key === "Escape") {
+                close();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [openName, name, close]);
+
+    // Focus the first focusable element when the modal is opened
+    useEffect(() => {
+        if (openName !== name) return;
+
+        previouslyFocusedElement.current =
+            document.activeElement as HTMLElement;
+
+        const modalElement = modalRef.current;
+        if (!modalElement) return;
+
+        const focusableSelectors = [
+            "a[href]",
+            "button:not([disabled])",
+            "textarea:not([disabled])",
+            "input:not([disabled])",
+            "select:not([disabled])",
+            "[tabindex]:not([tabindex='-1'])"
+        ].join(",");
+
+        const focusableElements = Array.from(
+            modalElement.querySelectorAll<HTMLElement>(focusableSelectors)
+        );
+
+        if (focusableElements.length > 0) {
+            focusableElements[0].focus();
+        } else {
+            modalElement.focus();
+        }
+
+        return () => {
+            const prev = previouslyFocusedElement.current as HTMLElement | null;
+            if (prev && typeof prev.focus === "function") {
+                prev.focus();
+            }
+        };
+    }, [openName, name]);
 
     if (openName !== name) return null;
     if (typeof document === "undefined") return null;
+
+    // Close the modal when the user clicks outside of it
+    function handleOverlayClick(event: MouseEvent<HTMLDivElement>) {
+        if (event.target === event.currentTarget) {
+            close();
+        }
+    }
 
     if (!isValidElement(children)) {
         throw new Error(
@@ -147,14 +213,65 @@ function Content({ children, name }: ContentProps) {
         onCloseModal?: () => void;
     }>;
 
-    const handleCloseModal = () => {
+    function handleCloseModal() {
         child.props.onCloseModal?.();
         close();
-    };
+    }
+
+    // Handle the Tab key to navigate between focusable elements
+    function handleKeyDownInside(event: KeyboardEvent<HTMLDivElement>) {
+        if (event.key !== "Tab") return;
+
+        const modalEl = modalRef.current;
+        if (!modalEl) return;
+
+        const focusableSelectors = [
+            "a[href]",
+            "button:not([disabled])",
+            "textarea:not([disabled])",
+            "input:not([disabled])",
+            "select:not([disabled])",
+            "[tabindex]:not([tabindex='-1'])"
+        ].join(",");
+
+        const focusableElements = Array.from(
+            modalEl.querySelectorAll<HTMLElement>(focusableSelectors)
+        );
+
+        if (focusableElements.length === 0) return;
+
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+        const current = document.activeElement as HTMLElement | null;
+
+        if (event.shiftKey && current === first) {
+            event.preventDefault();
+            last.focus();
+            return;
+        }
+
+        if (!event.shiftKey && current === last) {
+            event.preventDefault();
+            first.focus();
+            return;
+        }
+    }
+
+    const ariaProps =
+        titleId != null
+            ? { "aria-labelledby": titleId }
+            : { "aria-label": ariaLabel ?? "Modal dialog" };
 
     return createPortal(
-        <Overlay>
-            <StyledModal>
+        <Overlay onMouseDown={handleOverlayClick}>
+            <StyledModal
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                tabIndex={-1}
+                onKeyDown={handleKeyDownInside}
+                {...ariaProps}
+            >
                 <Button onClick={close}>
                     <HiXMark />
                 </Button>
