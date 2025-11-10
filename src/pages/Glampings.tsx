@@ -1,16 +1,11 @@
 import { PAGES } from "@/constants/pages.constants";
 
-import Button from "@/ui/Button";
-import GlampingTable from "@/features/glampings/GlampingTable";
-
-import Heading from "@/ui/Heading";
 import Row from "@/ui/Row";
-import { useState } from "react";
-import CreateOrEditGlampingForm from "@/features/glampings/CreateOrEditGlampingForm";
+import Heading from "@/ui/Heading";
+import GlampingTable from "@/features/glampings/GlampingTable";
+import AddGlamping from "@/features/glampings/AddGlamping";
 
 export default function Glampings() {
-    const [showForm, setShowForm] = useState<boolean>(false);
-
     return (
         <>
             <Row>
@@ -20,13 +15,7 @@ export default function Glampings() {
 
             <Row type="vertical">
                 <GlampingTable />
-
-                <Button onClick={() => setShowForm((show) => !show)}>
-                    {PAGES.GLAMPINGS.ADD_GLAMPING}
-                </Button>
-                {showForm && (
-                    <CreateOrEditGlampingForm glamping={null} onClose={() => setShowForm(false)} />
-                )}
+                <AddGlamping />
             </Row>
         </>
     );

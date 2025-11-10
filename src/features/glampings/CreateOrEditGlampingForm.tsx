@@ -14,10 +14,13 @@ import FormRow from "@/ui/FormRow";
 
 type CreateOrEditGlampingFormProps = {
     glamping: Glamping | null;
-    onClose?: () => void;
+    onCloseModal?: () => void;
 };
 
-function CreateOrEditGlampingForm({ glamping = null, onClose }: CreateOrEditGlampingFormProps) {
+function CreateOrEditGlampingForm({
+    glamping = null,
+    onCloseModal
+}: CreateOrEditGlampingFormProps) {
     const { id: editId, ...editValues } = glamping ?? ({} as Partial<Glamping>);
     const isEditSession = Boolean(editId && glamping);
 
@@ -90,7 +93,7 @@ function CreateOrEditGlampingForm({ glamping = null, onClose }: CreateOrEditGlam
                 },
                 {
                     onSuccess: () => {
-                        onClose?.();
+                        onCloseModal?.();
                     }
                 }
             );
@@ -104,7 +107,7 @@ function CreateOrEditGlampingForm({ glamping = null, onClose }: CreateOrEditGlam
                 {
                     onSuccess: () => {
                         reset();
-                        onClose?.();
+                        onCloseModal?.();
                     }
                 }
             );
@@ -112,7 +115,7 @@ function CreateOrEditGlampingForm({ glamping = null, onClose }: CreateOrEditGlam
     }
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)} type={onCloseModal ? "modal" : "regular"}>
             <FormRow label={PAGES.GLAMPINGS.FORM.NAME} errors={errors}>
                 <Input
                     type="text"
@@ -213,7 +216,7 @@ function CreateOrEditGlampingForm({ glamping = null, onClose }: CreateOrEditGlam
                     type="button"
                     onClick={() => {
                         reset();
-                        onClose?.();
+                        onCloseModal?.();
                     }}
                 >
                     {PAGES.GLAMPINGS.FORM.CANCEL}

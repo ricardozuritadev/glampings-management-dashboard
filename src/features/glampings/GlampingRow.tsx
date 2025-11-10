@@ -103,7 +103,10 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
             </TableRow>
 
             {showForm && (
-                <CreateOrEditGlampingForm glamping={glamping} onClose={() => setShowForm(false)} />
+                <CreateOrEditGlampingForm
+                    glamping={glamping}
+                    onCloseModal={() => setShowForm(false)}
+                />
             )}
         </>
     );
