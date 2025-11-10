@@ -1,27 +1,19 @@
-import { useState } from "react";
-
 import { PAGES } from "@/constants/pages.constants";
 
 import Button from "@/ui/Button";
 import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
-import Modal from "@/ui/Modal";
+import { Modal } from "@/ui/Modal";
 
 export default function AddGlamping() {
-    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
     return (
-        <div>
-            <Button onClick={() => setIsOpenModal((isOpen) => !isOpen)}>
-                {PAGES.GLAMPINGS.ADD_GLAMPING}
-            </Button>
-            {isOpenModal && (
-                <Modal onClose={() => setIsOpenModal(false)}>
-                    <CreateOrEditGlampingForm
-                        glamping={null}
-                        onCloseModal={() => setIsOpenModal(false)}
-                    />
-                </Modal>
-            )}
-        </div>
+        <Modal>
+            <Modal.Trigger opens={PAGES.GLAMPINGS.MODALS.GLAMPING_FORM}>
+                <Button>{PAGES.GLAMPINGS.ADD_GLAMPING}</Button>
+            </Modal.Trigger>
+
+            <Modal.Content name={PAGES.GLAMPINGS.MODALS.GLAMPING_FORM}>
+                <CreateOrEditGlampingForm glamping={null} />
+            </Modal.Content>
+        </Modal>
     );
 }

@@ -20,7 +20,8 @@ export const PAGES = {
         HEADER: "Configuración",
         TOASTS: {
             ERROR_GET: "Ha ocurrido un error al obtener las configuraciones",
-            ERROR_UPDATE: "Ha ocurrido un error al actualizar las configuraciones",
+            ERROR_UPDATE:
+                "Ha ocurrido un error al actualizar las configuraciones",
             UPDATED: "Configuraciones actualizadas correctamente"
         },
         MAX_BOOKING_LENGTH: "Máximo de días de reserva",
@@ -37,6 +38,7 @@ export const PAGES = {
             SATURDAY_PRICE: "Precio Sábado"
         },
         ADD_GLAMPING: "Añadir glamping",
+        EDIT_GLAMPING: "Editar glamping",
         TOASTS: {
             CREATED: "Glamping creado correctamente",
             UPDATED: "Glamping actualizado correctamente",
@@ -46,6 +48,9 @@ export const PAGES = {
             ERROR_UPDATE: "Ha ocurrido un error al actualizar el glamping",
             ERROR_DELETE: "Ha ocurrido un error al eliminar el glamping",
             ERROR_UPLOAD_IMAGE: "Ha ocurrido un error al subir la imagen"
+        },
+        MODALS: {
+            GLAMPING_FORM: "glamping-form"
         },
         FORM: {
             NAME: "Nombre del glamping",
