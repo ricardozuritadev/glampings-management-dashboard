@@ -50,7 +50,8 @@ export const PAGES = {
             ERROR_UPLOAD_IMAGE: "Ha ocurrido un error al subir la imagen"
         },
         MODALS: {
-            GLAMPING_FORM: "glamping-form"
+            GLAMPING_FORM: "glamping-form",
+            EDIT_GLAMPING_FORM: "edit-glamping-form"
         },
         FORM: {
             NAME: "Nombre del glamping",

@@ -6,14 +6,16 @@ import { Modal } from "@/ui/Modal";
 
 export default function AddGlamping() {
     return (
-        <Modal>
-            <Modal.Trigger opens={PAGES.GLAMPINGS.MODALS.GLAMPING_FORM}>
-                <Button>{PAGES.GLAMPINGS.ADD_GLAMPING}</Button>
-            </Modal.Trigger>
+        <div>
+            <Modal>
+                <Modal.Trigger opens={PAGES.GLAMPINGS.MODALS.GLAMPING_FORM}>
+                    <Button>{PAGES.GLAMPINGS.ADD_GLAMPING}</Button>
+                </Modal.Trigger>
 
-            <Modal.Content name={PAGES.GLAMPINGS.MODALS.GLAMPING_FORM}>
-                <CreateOrEditGlampingForm glamping={null} />
-            </Modal.Content>
-        </Modal>
+                <Modal.Content name={PAGES.GLAMPINGS.MODALS.GLAMPING_FORM}>
+                    <CreateOrEditGlampingForm glamping={null} />
+                </Modal.Content>
+            </Modal>
+        </div>
     );
 }

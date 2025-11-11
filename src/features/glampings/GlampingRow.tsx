@@ -10,6 +10,9 @@ import Row from "@/ui/Row";
 import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
 import { HiPencilSquare, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateGlamping } from "./useCreateGlamping";
+import { Modal } from "@/ui/Modal";
+import { PAGES } from "@/constants/pages.constants";
+import ConfirmDelete from "@/ui/ConfirmDelete";
 
 const TableRow = styled.div`
     display: grid;
@@ -53,10 +56,16 @@ type CabinRowProps = {
 };
 
 export default function GlampingRow({ glamping }: CabinRowProps) {
-    const { id, image, name, maxCapacity, weekdayPrice, fridayPrice, saturdayPrice, description } =
-        glamping;
-
-    const [showForm, setShowForm] = useState<boolean>(false);
+    const {
+        id,
+        image,
+        name,
+        maxCapacity,
+        weekdayPrice,
+        fridayPrice,
+        saturdayPrice,
+        description
+    } = glamping;
 
     const { isDeleting, deleteGlamping } = useDeleteGlamping();
     const { isCreating, createGlamping } = useCreateGlamping();
@@ -76,38 +85,49 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
     }
 
     return (
-        <>
-            <TableRow role="row">
-                <Img src={image || ""} alt="Glamping" />
-                <GlampingName>{name}</GlampingName>
-                <Capacity>
-                    Hasta <b>{maxCapacity}</b> {pluralize(maxCapacity, "persona")}
-                </Capacity>
-                <Price>{formatCurrency(weekdayPrice || 0)}</Price>
-                <Price>{formatCurrency(fridayPrice || 0)}</Price>
-                <Price>{formatCurrency(saturdayPrice || 0)}</Price>
+        <TableRow role="row">
+            <Img src={image || ""} alt="Glamping" />
+            <GlampingName>{name}</GlampingName>
+            <Capacity>
+                Hasta <b>{maxCapacity}</b> {pluralize(maxCapacity, "persona")}
+            </Capacity>
+            <Price>{formatCurrency(weekdayPrice || 0)}</Price>
+            <Price>{formatCurrency(fridayPrice || 0)}</Price>
+            <Price>{formatCurrency(saturdayPrice || 0)}</Price>
 
-                <Row>
-                    <button onClick={handleDuplicate} disabled={isCreating}>
-                        <HiSquare2Stack />
-                    </button>
+            <Row>
+                <button onClick={handleDuplicate} disabled={isCreating}>
+                    <HiSquare2Stack />
+                </button>
 
-                    <button onClick={() => setShowForm((show) => !show)}>
-                        <HiPencilSquare />
-                    </button>
+                <Modal>
+                    <Modal.Trigger
+                        opens={PAGES.GLAMPINGS.MODALS.EDIT_GLAMPING_FORM}
+                    >
+                        <button>
+                            <HiPencilSquare />
+                        </button>
+                    </Modal.Trigger>
+                    <Modal.Content
+                        name={PAGES.GLAMPINGS.MODALS.EDIT_GLAMPING_FORM}
+                    >
+                        <CreateOrEditGlampingForm glamping={glamping} />
+                    </Modal.Content>
 
-                    <button onClick={() => deleteGlamping(id)} disabled={isDeleting}>
-                        <HiTrash />
-                    </button>
-                </Row>
-            </TableRow>
-
-            {showForm && (
-                <CreateOrEditGlampingForm
-                    glamping={glamping}
-                    onCloseModal={() => setShowForm(false)}
-                />
-            )}
-        </>
+                    <Modal.Trigger opens="delete-glamping-modal">
+                        <button disabled={isDeleting}>
+                            <HiTrash />
+                        </button>
+                    </Modal.Trigger>
+                    <Modal.Content name="delete-glamping-modal">
+                        <ConfirmDelete
+                            resourceName="glamping"
+                            onConfirm={() => deleteGlamping(id)}
+                            disabled={isDeleting}
+                        />
+                    </Modal.Content>
+                </Modal>
+            </Row>
+        </TableRow>
     );
 }
