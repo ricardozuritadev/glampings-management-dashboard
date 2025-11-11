@@ -113,12 +113,16 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
                         <CreateOrEditGlampingForm glamping={glamping} />
                     </Modal.Content>
 
-                    <Modal.Trigger opens="delete-glamping-modal">
+                    <Modal.Trigger
+                        opens={PAGES.GLAMPINGS.MODALS.DELETE_GLAMPING_FORM}
+                    >
                         <button disabled={isDeleting}>
                             <HiTrash />
                         </button>
                     </Modal.Trigger>
-                    <Modal.Content name="delete-glamping-modal">
+                    <Modal.Content
+                        name={PAGES.GLAMPINGS.MODALS.DELETE_GLAMPING_FORM}
+                    >
                         <ConfirmDelete
                             resourceName="glamping"
                             onConfirm={() => deleteGlamping(id)}

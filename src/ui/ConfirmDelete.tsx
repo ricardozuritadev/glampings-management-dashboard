@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import Button from "./Button";
-import Heading from "./Heading";
+
+import Button from "@/ui/Button";
+import Heading from "@/ui/Heading";
+import { PAGES } from "@/constants/pages.constants";
 
 const StyledConfirmDelete = styled.div`
     width: 40rem;
@@ -35,10 +37,17 @@ function ConfirmDelete({
 }: ConfirmDeleteProps) {
     return (
         <StyledConfirmDelete>
-            <Heading as="h3">Eliminar {resourceName}</Heading>
+            <Heading as="h3">
+                {PAGES.CONFIRM_DELETE.TITLE.replace(
+                    "{resourceName}",
+                    resourceName
+                )}
+            </Heading>
             <p>
-                ¿Estás seguro de querer eliminar este {resourceName}{" "}
-                permanentemente? Esta acción no puede ser deshecha.
+                {PAGES.CONFIRM_DELETE.MESSAGE.replace(
+                    "{resourceName}",
+                    resourceName
+                )}
             </p>
 
             <div>
@@ -47,7 +56,7 @@ function ConfirmDelete({
                     disabled={disabled}
                     onClick={onCloseModal}
                 >
-                    Cancelar
+                    {PAGES.CONFIRM_DELETE.CANCEL}
                 </Button>
 
                 <Button
@@ -55,7 +64,7 @@ function ConfirmDelete({
                     disabled={disabled}
                     onClick={onConfirm}
                 >
-                    Eliminar
+                    {PAGES.CONFIRM_DELETE.DELETE}
                 </Button>
             </div>
         </StyledConfirmDelete>

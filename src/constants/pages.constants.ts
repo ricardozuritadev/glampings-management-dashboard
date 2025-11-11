@@ -51,7 +51,8 @@ export const PAGES = {
         },
         MODALS: {
             GLAMPING_FORM: "glamping-form",
-            EDIT_GLAMPING_FORM: "edit-glamping-form"
+            EDIT_GLAMPING_FORM: "edit-glamping-form",
+            DELETE_GLAMPING_FORM: "delete-glamping-form"
         },
         FORM: {
             NAME: "Nombre del glamping",
@@ -75,5 +76,12 @@ export const PAGES = {
     },
     PAGE_NOT_FOUND: {
         HEADER: "No se encontró la página"
+    },
+    CONFIRM_DELETE: {
+        TITLE: "Eliminar {resourceName}",
+        MESSAGE:
+            "¿Estás seguro de querer eliminar este {resourceName} permanentemente? Esta acción no puede ser deshecha.",
+        CANCEL: "Cancelar",
+        DELETE: "Eliminar"
     }
 };
