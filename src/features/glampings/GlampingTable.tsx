@@ -5,15 +5,8 @@ import { PAGES } from "@/constants/pages.constants";
 
 import Spinner from "@/ui/Spinner";
 import GlampingRow from "./GlampingRow";
-
-const Table = styled.div`
-    border: 1px solid var(--color-grey-200);
-    font-size: 1.4rem;
-    background-color: var(--color-grey-0);
-    border-radius: 7px;
-    overflow: hidden;
-    width: 100%;
-`;
+import Table from "@/ui/Table";
+import type { Glamping } from "@/types/features/glamping.types";
 
 const TableHeader = styled.header`
     display: grid;
@@ -35,19 +28,25 @@ export default function GlampingTable() {
     if (isPending) return <Spinner />;
 
     return (
-        <Table role="table">
-            <TableHeader role="row">
+        <Table columns="0.6fr 1.8fr 1.8fr 2fr 1.5fr 1.5fr 1fr">
+            <Table.Header columns="0.6fr 1.8fr 1.8fr 2fr 1.5fr 1.5fr 1fr">
                 <div></div>
                 <div>{PAGES.GLAMPINGS.TABLE.HEADER}</div>
                 <div>{PAGES.GLAMPINGS.TABLE.CAPACITY}</div>
                 <div>{PAGES.GLAMPINGS.TABLE.WEEKDAY_PRICE}</div>
                 <div>{PAGES.GLAMPINGS.TABLE.FRIDAY_PRICE}</div>
                 <div>{PAGES.GLAMPINGS.TABLE.SATURDAY_PRICE}</div>
-            </TableHeader>
+            </Table.Header>
 
-            {glampings?.map((glamping) => (
-                <GlampingRow key={glamping.id} glamping={glamping} />
-            ))}
+            <Table.Body
+                data={glampings ?? []}
+                render={(item) => {
+                    const glamping = item as Glamping;
+                    return (
+                        <GlampingRow key={glamping.id} glamping={glamping} />
+                    );
+                }}
+            />
         </Table>
     );
 }

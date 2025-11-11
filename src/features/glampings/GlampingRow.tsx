@@ -1,29 +1,18 @@
 import styled from "styled-components";
 
+import { HiPencilSquare, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useDeleteGlamping } from "./useDeleteGlamping";
+import { useCreateGlamping } from "./useCreateGlamping";
 
+import { PAGES } from "@/constants/pages.constants";
 import { formatCurrency, pluralize } from "@/utils/helpers";
 import type { Glamping } from "@/types/features/glamping.types";
 
 import Row from "@/ui/Row";
-import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
-import { HiPencilSquare, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useCreateGlamping } from "./useCreateGlamping";
+import Table from "@/ui/Table";
 import { Modal } from "@/ui/Modal";
-import { PAGES } from "@/constants/pages.constants";
 import ConfirmDelete from "@/ui/ConfirmDelete";
-
-const TableRow = styled.div`
-    display: grid;
-    grid-template-columns: 0.6fr 1.8fr 1.8fr 2fr 1.5fr 1.5fr 1fr;
-    column-gap: 2.4rem;
-    align-items: center;
-    padding: 1.4rem 2.4rem;
-
-    &:not(:last-child) {
-        border-bottom: 1px solid var(--color-grey-100);
-    }
-`;
+import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
 
 const Img = styled.img`
     display: block;
@@ -84,7 +73,7 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
     }
 
     return (
-        <TableRow role="row">
+        <Table.Row>
             <Img src={image || ""} alt="Glamping" />
             <GlampingName>{name}</GlampingName>
             <Capacity>
@@ -131,6 +120,6 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
                     </Modal.Content>
                 </Modal>
             </Row>
-        </TableRow>
+        </Table.Row>
     );
 }
