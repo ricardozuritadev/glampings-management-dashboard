@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { useState } from "react";
 import { useDeleteGlamping } from "./useDeleteGlamping";
 
 import { formatCurrency, pluralize } from "@/utils/helpers";
