@@ -6,7 +6,76 @@ export const PAGES = {
         HEADER: "Panel de Administración"
     },
     BOOKINGS: {
-        HEADER: "Reservas"
+        HEADER: "Reservas",
+        TABLE: {
+            GLAMPING: "Glamping",
+            GUEST: "Huésped",
+            DATES: "Fechas",
+            STATUS: "Estado",
+            AMOUNT: "Monto"
+        },
+        DETAIL: {
+            TITLE: "Reserva #{id}",
+            NOT_FOUND: "Reserva no encontrada",
+            BACK: "Atrás"
+        },
+        ROW: {
+            TODAY: "Hoy",
+            STARTS_IN: "Comienza en",
+            NIGHT_STAY: "noche de estancia",
+            NIGHTS_STAY: "noches de estancia"
+        },
+        DATA_BOX: {
+            NIGHTS_IN_GLAMPING: "{nights} noches en Glamping",
+            TODAY: "Hoy",
+            GUESTS: "huéspedes",
+            NATIONAL_ID: "DNI",
+            OBSERVATIONS: "Observaciones",
+            BREAKFAST_INCLUDED: "¿Desayuno incluido?",
+            YES: "Sí",
+            NO: "No",
+            TOTAL_PRICE: "Precio total",
+            CABIN: "glamping",
+            BREAKFAST: "desayuno",
+            PAID: "Pagado",
+            WILL_PAY_AT_PROPERTY: "Pagar en el establecimiento",
+            BOOKED: "Reservado"
+        },
+        STATUS: {
+            UNCONFIRMED: "no confirmada",
+            CHECKED_IN: "registrado",
+            CHECKED_OUT: "salida"
+        },
+        SORT_OPTIONS: [
+            {
+                value: "startDate-desc",
+                label: "Ordenar por fecha (reciente primero)"
+            },
+            {
+                value: "startDate-asc",
+                label: "Ordenar por fecha (antiguo primero)"
+            },
+            {
+                value: "totalPrice-desc",
+                label: "Ordenar por monto (mayor primero)"
+            },
+            {
+                value: "totalPrice-asc",
+                label: "Ordenar por monto (menor primero)"
+            }
+        ],
+        TOASTS: {
+            ERROR_GET: "Ha ocurrido un error al obtener las reservas",
+            ERROR_GET_BOOKINGS_AFTER_DATE:
+                "Ha ocurrido un error al obtener las reservas",
+            ERROR_GET_STAYS_AFTER_DATE:
+                "Ha ocurrido un error al obtener las estancias",
+            ERROR_GET_STAYS_TODAY_ACTIVITY:
+                "Ha ocurrido un error al obtener la actividad de las estancias",
+            ERROR_UPDATE_BOOKING:
+                "Ha ocurrido un error al actualizar la reserva",
+            ERROR_DELETE_BOOKING: "Ha ocurrido un error al eliminar la reserva"
+        }
     },
     ACCOUNT: {
         HEADER: "Cuenta",

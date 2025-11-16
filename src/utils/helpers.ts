@@ -1,14 +1,16 @@
 import { formatDistance, parseISO, differenceInDays } from "date-fns";
+import { es } from "date-fns/locale";
 
 export const subtractDates = (dateStr1: string, dateStr2: string) =>
     differenceInDays(parseISO(String(dateStr1)), parseISO(String(dateStr2)));
 
 export const formatDistanceFromNow = (dateStr: string) =>
     formatDistance(parseISO(dateStr), new Date(), {
-        addSuffix: true
+        addSuffix: true,
+        locale: es
     })
-        .replace("about ", "")
-        .replace("in", "In");
+        .replace("aproximadamente ", "")
+        .replace("en ", "");
 
 export const getToday = function (options: { end?: boolean } = {}) {
     const today = new Date();
@@ -21,7 +23,9 @@ export const getToday = function (options: { end?: boolean } = {}) {
 };
 
 export const formatCurrency = (value: number) =>
-    new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(value);
+    new Intl.NumberFormat("en", { style: "currency", currency: "USD" }).format(
+        value
+    );
 
 export const pluralize = (count: number | null, word: string) => {
     if (!count) return word;

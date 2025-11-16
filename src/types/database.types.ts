@@ -1,4 +1,10 @@
-export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+export type Json =
+    | string
+    | number
+    | boolean
+    | null
+    | { [key: string]: Json | undefined }
+    | Json[];
 
 export type Database = {
     // Allows to automatically instantiate createClient with right options
@@ -37,11 +43,8 @@ export type Database = {
                 Row: {
                     created_at: string;
                     endDate: string | null;
-                    extrasPrice: number | null;
                     glampingId: number | null;
-                    glampingPrice: number | null;
                     guestId: number | null;
-                    hasBreakfast: boolean | null;
                     id: number;
                     isPaid: boolean | null;
                     numGuests: number | null;
@@ -54,11 +57,8 @@ export type Database = {
                 Insert: {
                     created_at?: string;
                     endDate?: string | null;
-                    extrasPrice?: number | null;
                     glampingId?: number | null;
-                    glampingPrice?: number | null;
                     guestId?: number | null;
-                    hasBreakfast?: boolean | null;
                     id?: number;
                     isPaid?: boolean | null;
                     numGuests?: number | null;
@@ -71,11 +71,8 @@ export type Database = {
                 Update: {
                     created_at?: string;
                     endDate?: string | null;
-                    extrasPrice?: number | null;
                     glampingId?: number | null;
-                    glampingPrice?: number | null;
                     guestId?: number | null;
-                    hasBreakfast?: boolean | null;
                     id?: number;
                     isPaid?: boolean | null;
                     numGuests?: number | null;
@@ -112,7 +109,6 @@ export type Database = {
                     maxCapacity: number | null;
                     name: string | null;
                     saturdayPrice: number | null;
-                    weekdayDiscount: boolean | null;
                     weekdayPrice: number | null;
                 };
                 Insert: {
@@ -124,7 +120,6 @@ export type Database = {
                     maxCapacity?: number | null;
                     name?: string | null;
                     saturdayPrice?: number | null;
-                    weekdayDiscount?: boolean | null;
                     weekdayPrice?: number | null;
                 };
                 Update: {
@@ -136,7 +131,6 @@ export type Database = {
                     maxCapacity?: number | null;
                     name?: string | null;
                     saturdayPrice?: number | null;
-                    weekdayDiscount?: boolean | null;
                     weekdayPrice?: number | null;
                 };
                 Relationships: [];
@@ -213,7 +207,10 @@ export type Database = {
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">;
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">];
+type DefaultSchema = DatabaseWithoutInternals[Extract<
+    keyof Database,
+    "public"
+>];
 
 export type Tables<
     DefaultSchemaTableNameOrOptions extends

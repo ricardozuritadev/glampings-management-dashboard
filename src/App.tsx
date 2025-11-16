@@ -8,6 +8,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
+import BookingDetail from "./features/bookings/BookingDetail";
 import Glampings from "./pages/Glampings";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
@@ -34,9 +35,16 @@ export default function App() {
             <BrowserRouter>
                 <Routes>
                     <Route element={<AppLayout />}>
-                        <Route index element={<Navigate to={PATHS.DASHBOARD} />} />
+                        <Route
+                            index
+                            element={<Navigate to={PATHS.DASHBOARD} />}
+                        />
                         <Route path={PATHS.DASHBOARD} element={<Dashboard />} />
                         <Route path={PATHS.BOOKINGS} element={<Bookings />} />
+                        <Route
+                            path={`${PATHS.BOOKINGS}/:bookingId`}
+                            element={<BookingDetail />}
+                        />
                         <Route path={PATHS.GLAMPINGS} element={<Glampings />} />
                         <Route path={PATHS.USERS} element={<Users />} />
                         <Route path={PATHS.SETTINGS} element={<Settings />} />
@@ -44,7 +52,10 @@ export default function App() {
                     </Route>
 
                     <Route path={PATHS.LOGIN} element={<Login />} />
-                    <Route path={PATHS.PAGE_NOT_FOUND} element={<PageNotFound />} />
+                    <Route
+                        path={PATHS.PAGE_NOT_FOUND}
+                        element={<PageNotFound />}
+                    />
                 </Routes>
             </BrowserRouter>
 
