@@ -1,31 +1,46 @@
-import styled from "styled-components";
 import { useGlampings } from "./useGlampings";
+import { useSearchParams } from "react-router-dom";
 
 import { PAGES } from "@/constants/pages.constants";
+import type { Glamping } from "@/types/features/glamping.types";
 
 import Spinner from "@/ui/Spinner";
 import GlampingRow from "./GlampingRow";
 import Table from "@/ui/Table";
-import type { Glamping } from "@/types/features/glamping.types";
-
-const TableHeader = styled.header`
-    display: grid;
-    grid-template-columns: 0.6fr 1.8fr 1.8fr 2fr 1.5fr 1.5fr 1fr;
-    column-gap: 2.4rem;
-    align-items: center;
-    background-color: var(--color-grey-50);
-    border-bottom: 1px solid var(--color-grey-100);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    font-weight: 600;
-    color: var(--color-grey-600);
-    padding: 1.6rem 2.4rem;
-`;
 
 export default function GlampingTable() {
     const { isPending, glampings } = useGlampings();
+    const [searchParams] = useSearchParams();
 
     if (isPending) return <Spinner />;
+
+    const sortBy = searchParams.get("sortBy") || "name-asc";
+
+    const [field, direction] = sortBy.split("-");
+
+    const sortedGlampings = glampings?.sort((a, b) => {
+        const aValue = a[field as keyof Glamping];
+        const bValue = b[field as keyof Glamping];
+
+        // Handle null values
+        if (aValue === null && bValue === null) return 0;
+        if (aValue === null) return 1;
+        if (bValue === null) return -1;
+
+        // Handle number fields
+        if (typeof aValue === "number" && typeof bValue === "number") {
+            return direction === "asc" ? aValue - bValue : bValue - aValue;
+        }
+
+        // Handle string fields
+        if (typeof aValue === "string" && typeof bValue === "string") {
+            return direction === "asc"
+                ? aValue.localeCompare(bValue)
+                : bValue.localeCompare(aValue);
+        }
+
+        return 0;
+    });
 
     return (
         <Table columns="0.6fr 1.8fr 1.8fr 2fr 1.5fr 1.5fr 1fr">
@@ -39,7 +54,7 @@ export default function GlampingTable() {
             </Table.Header>
 
             <Table.Body
-                data={glampings ?? []}
+                data={sortedGlampings ?? []}
                 render={(item) => {
                     const glamping = item as Glamping;
                     return (

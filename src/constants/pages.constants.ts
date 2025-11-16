@@ -69,7 +69,25 @@ export const PAGES = {
                 MIN: "El valor mínimo es {min}",
                 MAX: "El valor máximo es {max}"
             }
-        }
+        },
+        SORT_OPTIONS: [
+            {
+                value: "name-asc",
+                label: "Ordenar por nombre (A-Z)"
+            },
+            {
+                value: "name-desc",
+                label: "Ordenar por nombre (Z-A)"
+            },
+            {
+                value: "maxCapacity-asc",
+                label: "Ordenar por capacidad (menos a más)"
+            },
+            {
+                value: "maxCapacity-desc",
+                label: "Ordenar por capacidad (más a menos)"
+            }
+        ]
     },
     LOGIN: {
         HEADER: "Iniciar sesión"
