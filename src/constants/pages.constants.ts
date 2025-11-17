@@ -175,6 +175,21 @@ export const PAGES = {
             }
         }
     },
+    SIGNUP: {
+        FORM: {
+            CREATE_USER: "Crear usuario",
+            FULL_NAME: "Nombre completo",
+            EMAIL: "Email",
+            PASSWORD: "Contraseña",
+            PASSWORD_CONFIRM: "Confirmar contraseña",
+            VALIDATIONS: {
+                REQUIRED: "Este campo es requerido",
+                EMAIL: "El email no es válido",
+                MIN: "El valor mínimo es {min}",
+                PASSWORD_MATCH: "Las contraseñas no coinciden"
+            }
+        }
+    },
     PAGE_NOT_FOUND: {
         HEADER: "No se encontró la página"
     },

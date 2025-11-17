@@ -28,12 +28,16 @@ function FormRowVertical({ label, errors, children }: FormRowVerticalProps) {
     const childId = isValidElement(children)
         ? (children.props as { id?: string })?.id || ""
         : "";
+    const fieldError =
+        childId && errors
+            ? (errors as Record<string, { message?: string }>)[childId]
+            : undefined;
 
     return (
         <StyledFormRow>
             {label && <Label htmlFor={childId}>{label}</Label>}
             {children}
-            {errors?.name && <Error>{errors.name.message as string}</Error>}
+            {fieldError && <Error>{fieldError.message as string}</Error>}
         </StyledFormRow>
     );
 }
