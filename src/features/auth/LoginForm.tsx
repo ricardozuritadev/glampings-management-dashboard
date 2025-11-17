@@ -10,8 +10,8 @@ import FormRowVertical from "@/ui/FormRowVertical";
 import SpinnerMini from "@/ui/SpinnerMini";
 
 function LoginForm() {
-    const [email, setEmail] = useState("ricardo@email.com");
-    const [password, setPassword] = useState("Qwerty!23456");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const { login, isLoggingIn } = useLogin();
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -21,7 +21,15 @@ function LoginForm() {
             return;
         }
 
-        login({ email, password });
+        login(
+            { email, password },
+            {
+                onSettled: () => {
+                    setEmail("");
+                    setPassword("");
+                }
+            }
+        );
     }
 
     return (
