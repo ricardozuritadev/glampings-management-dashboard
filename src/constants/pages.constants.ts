@@ -159,7 +159,21 @@ export const PAGES = {
         ]
     },
     LOGIN: {
-        HEADER: "Iniciar sesión"
+        FORM: {
+            EMAIL: "Email",
+            PASSWORD: "Contraseña",
+            LOGIN: "Iniciar sesión",
+            VALIDATIONS: {
+                REQUIRED: "Este campo es requerido",
+                MIN: "El valor mínimo es {min}",
+                MAX: "El valor máximo es {max}"
+            },
+            TOASTS: {
+                SUCCESS: "Inicio de sesión exitoso",
+                ERROR: "Ha ocurrido un error al iniciar sesión",
+                WRONG_CREDENTIALS: "El email o la contraseña son incorrectos"
+            }
+        }
     },
     PAGE_NOT_FOUND: {
         HEADER: "No se encontró la página"

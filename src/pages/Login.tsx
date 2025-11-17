@@ -1,6 +1,9 @@
-import { PAGES } from "@/constants/pages.constants";
-
 import styled from "styled-components";
+
+import LoginForm from "@/features/auth/LoginForm";
+import Logo from "@/ui/Logo";
+import Heading from "@/ui/Heading";
+import { PAGES } from "@/constants/pages.constants";
 
 const LoginLayout = styled.main`
     min-height: 100vh;
@@ -13,5 +16,11 @@ const LoginLayout = styled.main`
 `;
 
 export default function Login() {
-    return <LoginLayout>{PAGES.LOGIN.HEADER}</LoginLayout>;
+    return (
+        <LoginLayout>
+            <Logo />
+            <Heading as="h4">{PAGES.LOGIN.FORM.LOGIN}</Heading>
+            <LoginForm />
+        </LoginLayout>
+    );
 }
