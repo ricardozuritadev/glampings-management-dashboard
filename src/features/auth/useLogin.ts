@@ -14,8 +14,8 @@ export function useLogin() {
     const { mutate: login, isPending: isLoggingIn } = useMutation({
         mutationFn: loginApi,
         onSuccess: ({ user }) => {
-            queryClient.setQueriesData({ queryKey: ["user"] }, user);
-            navigate(`/${PATHS.DASHBOARD}`);
+            queryClient.setQueryData(["user"], { user });
+            navigate(`/${PATHS.DASHBOARD}`, { replace: true });
         },
         onError: () => {
             toast.error(PAGES.LOGIN.FORM.TOASTS.WRONG_CREDENTIALS);
