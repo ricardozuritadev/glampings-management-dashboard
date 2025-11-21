@@ -83,7 +83,12 @@ export const PAGES = {
         UPDATE_PASSWORD: "Actualiza la contraseña"
     },
     USERS: {
-        HEADER: "Usuarios"
+        HEADER: "Usuarios",
+        TOASTS: {
+            ACCOUNT_CREATED:
+                "Cuenta creada exitosamente. Revisa tu correo para confirmar tu cuenta.",
+            ACCOUNT_CREATED_ERROR: "Ha ocurrido un error al crear la cuenta."
+        }
     },
     SETTINGS: {
         HEADER: "Configuración",

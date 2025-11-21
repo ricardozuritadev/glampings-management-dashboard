@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useSignup } from "./useSignup";
 
 import { PAGES } from "@/constants/pages.constants";
 
@@ -15,12 +16,23 @@ type SignupFormData = {
 };
 
 function SignupForm() {
-    const { register, handleSubmit, formState, getValues } =
+    const { signup, isSignupPending } = useSignup();
+
+    const { register, handleSubmit, formState, getValues, reset } =
         useForm<SignupFormData>();
     const { errors } = formState;
 
-    function onSubmit(data: SignupFormData) {
-        console.log("data", data);
+    function onSubmit({ fullName, email, password }: SignupFormData) {
+        signup(
+            {
+                fullName,
+                email,
+                password
+            },
+            {
+                onSettled: () => reset
+            }
+        );
     }
 
     return (
@@ -32,6 +44,7 @@ function SignupForm() {
                     {...register("fullName", {
                         required: PAGES.SIGNUP.FORM.VALIDATIONS.REQUIRED
                     })}
+                    disabled={isSignupPending}
                 />
             </FormRow>
 
@@ -46,6 +59,7 @@ function SignupForm() {
                             message: PAGES.SIGNUP.FORM.VALIDATIONS.EMAIL
                         }
                     })}
+                    disabled={isSignupPending}
                 />
             </FormRow>
 
@@ -63,6 +77,7 @@ function SignupForm() {
                             )
                         }
                     })}
+                    disabled={isSignupPending}
                 />
             </FormRow>
 
@@ -76,6 +91,7 @@ function SignupForm() {
                             value === getValues().password ||
                             PAGES.SIGNUP.FORM.VALIDATIONS.PASSWORD_MATCH
                     })}
+                    disabled={isSignupPending}
                 />
             </FormRow>
 
@@ -84,7 +100,9 @@ function SignupForm() {
                 <Button variation="secondary" type="reset">
                     Cancel
                 </Button>
-                <Button>{PAGES.SIGNUP.FORM.CREATE_USER}</Button>
+                <Button disabled={isSignupPending}>
+                    {PAGES.SIGNUP.FORM.CREATE_USER}
+                </Button>
             </FormRow>
         </Form>
     );
