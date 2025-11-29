@@ -80,7 +80,9 @@ export const PAGES = {
     ACCOUNT: {
         HEADER: "Cuenta",
         UPDATE_DATA: "Actualiza los datos del usuario",
-        UPDATE_PASSWORD: "Actualiza la contraseña"
+        UPDATE_PASSWORD: "Actualiza la contraseña",
+        CANCEL: "Cancelar",
+        UPDATE_ACCOUNT: "Actualizar cuenta"
     },
     USERS: {
         HEADER: "Usuarios",

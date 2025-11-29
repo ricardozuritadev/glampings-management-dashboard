@@ -68,3 +68,34 @@ export async function logout() {
 
     return null;
 }
+
+export async function upadteCurrentUser({
+    password,
+    fullName,
+    avatar
+}: {
+    password?: string;
+    fullName?: string;
+    avatar?: string;
+}) {
+    // Build the update object properly to handle both password and user metadata
+    const updateData: {
+        password?: string;
+        data?: { fullName?: string };
+    } = {};
+
+    if (password) updateData.password = password;
+    if (fullName) updateData.data = { fullName };
+
+    const { data, error } = await supabase.auth.updateUser(updateData);
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    if (!avatar) return data;
+
+    const fileName = `avatar-${data.user.id}-${Math.random()}`;
+
+    return data;
+}
