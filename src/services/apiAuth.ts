@@ -76,9 +76,8 @@ export async function upadteCurrentUser({
 }: {
     password?: string;
     fullName?: string;
-    avatar?: string;
+    avatar?: File;
 }) {
-    // Build the update object properly to handle both password and user metadata
     const updateData: {
         password?: string;
         data?: { fullName?: string };
@@ -97,5 +96,25 @@ export async function upadteCurrentUser({
 
     const fileName = `avatar-${data.user.id}-${Math.random()}`;
 
-    return data;
+    const { error: storageError } = await supabase.storage
+        .from("avatars")
+        .upload(fileName, avatar);
+
+    if (storageError) {
+        throw new Error(storageError.message);
+    }
+
+    const { data: userData, error: userError } = await supabase.auth.updateUser(
+        {
+            data: {
+                avatar: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${fileName}`
+            }
+        }
+    );
+
+    if (userError) {
+        throw new Error(userError.message);
+    }
+
+    return userData;
 }

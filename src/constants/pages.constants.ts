@@ -29,7 +29,7 @@ export const PAGES = {
             NIGHTS_IN_GLAMPING: "{nights} noches en Glamping",
             TODAY: "Hoy",
             GUESTS: "huéspedes",
-            NATIONAL_ID: "DNI",
+            NATIONAL_ID: "Cédula de identidad: ",
             OBSERVATIONS: "Observaciones",
             BREAKFAST_INCLUDED: "¿Desayuno incluido?",
             YES: "Sí",
@@ -80,16 +80,29 @@ export const PAGES = {
     ACCOUNT: {
         HEADER: "Cuenta",
         UPDATE_DATA: "Actualiza los datos del usuario",
+        PASSWORD: "Nueva contraseña (mínimo 8 caracteres)",
+        PASSWORD_CONFIRM: "Confirmar contraseña",
         UPDATE_PASSWORD: "Actualiza la contraseña",
         CANCEL: "Cancelar",
-        UPDATE_ACCOUNT: "Actualizar cuenta"
+        UPDATE_ACCOUNT: "Actualizar cuenta",
+        PASSWORD_VALIDATIONS: {
+            REQUIRED: "Este campo es requerido",
+            MIN: "La contraseña debe tener al menos {min} caracteres",
+            MATCH: "Las contraseñas no coinciden"
+        },
+        TOASTS: {
+            ERROR_UPDATE: "Ha ocurrido un error al actualizar la cuenta"
+        }
     },
     USERS: {
         HEADER: "Usuarios",
         TOASTS: {
             ACCOUNT_CREATED:
                 "Cuenta creada exitosamente. Revisa tu correo para confirmar tu cuenta.",
-            ACCOUNT_CREATED_ERROR: "Ha ocurrido un error al crear la cuenta."
+            ACCOUNT_CREATED_ERROR: "Ha ocurrido un error al crear la cuenta.",
+            ACCOUNT_UPDATED: "Cuenta actualizada exitosamente.",
+            ACCOUNT_UPDATED_ERROR:
+                "Ha ocurrido un error al actualizar la cuenta."
         }
     },
     SETTINGS: {
