@@ -176,7 +176,12 @@ export const PAGES = {
                 value: "maxCapacity-desc",
                 label: "Ordenar por capacidad (más a menos)"
             }
-        ]
+        ],
+        TOOLTIPS: {
+            DUPLICATE: "Duplicar",
+            EDIT: "Editar",
+            DELETE: "Eliminar"
+        }
     },
     LOGIN: {
         FORM: {

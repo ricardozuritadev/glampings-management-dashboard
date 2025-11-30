@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { HiPencilSquare, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useDeleteGlamping } from "./useDeleteGlamping";
 import { useCreateGlamping } from "./useCreateGlamping";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 import { PAGES } from "@/constants/pages.constants";
 import { formatCurrency, pluralize } from "@/utils/helpers";
@@ -12,6 +13,7 @@ import Row from "@/ui/Row";
 import Table from "@/ui/Table";
 import { Modal } from "@/ui/Modal";
 import ConfirmDelete from "@/ui/ConfirmDelete";
+import Tooltip from "@/ui/Tooltip";
 import CreateOrEditGlampingForm from "./CreateOrEditGlampingForm";
 
 const Img = styled.img`
@@ -58,6 +60,8 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
     const { isDeleting, deleteGlamping } = useDeleteGlamping();
     const { isCreating, createGlamping } = useCreateGlamping();
 
+    const { isDarkMode } = useDarkMode();
+
     function handleDuplicate() {
         createGlamping({
             glamping: {
@@ -84,31 +88,60 @@ export default function GlampingRow({ glamping }: CabinRowProps) {
             <Price>{formatCurrency(saturdayPrice || 0)}</Price>
 
             <Row>
-                <button onClick={handleDuplicate} disabled={isCreating}>
-                    <HiSquare2Stack />
-                </button>
+                <Tooltip text={PAGES.GLAMPINGS.TOOLTIPS.DUPLICATE}>
+                    <button
+                        onClick={handleDuplicate}
+                        disabled={isCreating}
+                        style={{
+                            border: "none",
+                            backgroundColor: isDarkMode ? "#18212f" : "#fff"
+                        }}
+                    >
+                        <HiSquare2Stack />
+                    </button>
+                </Tooltip>
 
                 <Modal>
-                    <Modal.Trigger
-                        opens={PAGES.GLAMPINGS.MODALS.EDIT_GLAMPING_FORM}
-                    >
-                        <button>
-                            <HiPencilSquare />
-                        </button>
-                    </Modal.Trigger>
+                    <Tooltip text={PAGES.GLAMPINGS.TOOLTIPS.EDIT}>
+                        <Modal.Trigger
+                            opens={PAGES.GLAMPINGS.MODALS.EDIT_GLAMPING_FORM}
+                        >
+                            <button
+                                style={{
+                                    border: "none",
+                                    backgroundColor: isDarkMode
+                                        ? "#18212f"
+                                        : "#fff"
+                                }}
+                            >
+                                <HiPencilSquare />
+                            </button>
+                        </Modal.Trigger>
+                    </Tooltip>
+
                     <Modal.Content
                         name={PAGES.GLAMPINGS.MODALS.EDIT_GLAMPING_FORM}
                     >
                         <CreateOrEditGlampingForm glamping={glamping} />
                     </Modal.Content>
 
-                    <Modal.Trigger
-                        opens={PAGES.GLAMPINGS.MODALS.DELETE_GLAMPING_FORM}
-                    >
-                        <button disabled={isDeleting}>
-                            <HiTrash />
-                        </button>
-                    </Modal.Trigger>
+                    <Tooltip text={PAGES.GLAMPINGS.TOOLTIPS.DELETE}>
+                        <Modal.Trigger
+                            opens={PAGES.GLAMPINGS.MODALS.DELETE_GLAMPING_FORM}
+                        >
+                            <button
+                                disabled={isDeleting}
+                                style={{
+                                    border: "none",
+                                    backgroundColor: isDarkMode
+                                        ? "#18212f"
+                                        : "#fff"
+                                }}
+                            >
+                                <HiTrash />
+                            </button>
+                        </Modal.Trigger>
+                    </Tooltip>
                     <Modal.Content
                         name={PAGES.GLAMPINGS.MODALS.DELETE_GLAMPING_FORM}
                     >
