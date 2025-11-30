@@ -6,6 +6,7 @@ import { PATHS } from "@/constants/paths.constants";
 
 import ButtonIcon from "./ButtonIcon";
 import Logout from "@/features/auth/Logout";
+import DarkModeToggle from "./DarkModeToggle";
 
 const StyledHeaderMenu = styled.ul`
     display: flex;
@@ -21,6 +22,10 @@ export default function HeaderMenu() {
                 <ButtonIcon onClick={() => navigate(`/${PATHS.ACCOUNT}`)}>
                     <HiOutlineUser />
                 </ButtonIcon>
+            </li>
+
+            <li>
+                <DarkModeToggle />
             </li>
 
             <li>
