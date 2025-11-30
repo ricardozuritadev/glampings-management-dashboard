@@ -6,7 +6,6 @@ import { PAGES } from "@/constants/pages.constants";
 import {
     HiOutlineCalendarDays,
     HiOutlineCog6Tooth,
-    HiOutlineHome,
     HiOutlineHomeModern,
     HiOutlineUsers
 } from "react-icons/hi2";
