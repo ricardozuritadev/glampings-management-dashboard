@@ -2,11 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "styled-components";
 
 import { PATHS } from "./constants/paths.constants";
 import DarkModeProvider from "./context/DarkMode.context";
-import { useDarkMode } from "./hooks/useDarkMode";
 
 import ProtectedRoute from "./ui/ProtectedRoute";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -28,11 +26,9 @@ const queryClient = new QueryClient({
     }
 });
 
-function AppContent() {
-    const { isDarkMode } = useDarkMode();
-
+export default function App() {
     return (
-        <ThemeProvider theme={{ isDarkMode }}>
+        <DarkModeProvider>
             <QueryClientProvider client={queryClient}>
                 <ReactQueryDevtools />
 
@@ -102,14 +98,6 @@ function AppContent() {
                     }}
                 />
             </QueryClientProvider>
-        </ThemeProvider>
-    );
-}
-
-export default function App() {
-    return (
-        <DarkModeProvider>
-            <AppContent />
         </DarkModeProvider>
     );
 }
