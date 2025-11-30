@@ -219,5 +219,11 @@ export const PAGES = {
             "¿Estás seguro de querer eliminar este {resourceName} permanentemente? Esta acción no puede ser deshecha.",
         CANCEL: "Cancelar",
         DELETE: "Eliminar"
+    },
+    ERROR_FALLBACK: {
+        TITLE: "Ha ocurrido un error",
+        MESSAGE: "Ha ocurrido un error al cargar la página",
+        BUTTON: "Volver",
+        RESET: "Recargar la página"
     }
 };
