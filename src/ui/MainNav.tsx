@@ -59,12 +59,6 @@ export default function MainNav() {
     return (
         <NavList>
             <li>
-                <StyledNavLink to={PATHS.DASHBOARD}>
-                    <HiOutlineHome />
-                    <span>{PAGES.HOME.HEADER}</span>
-                </StyledNavLink>
-            </li>
-            <li>
                 <StyledNavLink to={PATHS.BOOKINGS}>
                     <HiOutlineCalendarDays />
                     <span>{PAGES.BOOKINGS.HEADER}</span>

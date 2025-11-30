@@ -9,7 +9,6 @@ import DarkModeProvider from "./context/DarkMode.context";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
-import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
 import BookingDetail from "./features/bookings/BookingDetail";
 import Glampings from "./pages/Glampings";
@@ -46,11 +45,7 @@ export default function App() {
                         >
                             <Route
                                 index
-                                element={<Navigate to={PATHS.DASHBOARD} />}
-                            />
-                            <Route
-                                path={PATHS.DASHBOARD}
-                                element={<Dashboard />}
+                                element={<Navigate to={PATHS.BOOKINGS} />}
                             />
                             <Route
                                 path={PATHS.BOOKINGS}

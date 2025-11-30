@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 import { login as loginApi } from "@/services/apiAuth";
 import { PAGES } from "@/constants/pages.constants";
-import { PATHS } from "@/constants/paths.constants";
 
 export function useLogin() {
     const queryClient = useQueryClient();
@@ -15,7 +14,7 @@ export function useLogin() {
         mutationFn: loginApi,
         onSuccess: ({ user }) => {
             queryClient.setQueryData(["user"], { user });
-            navigate(`/${PATHS.DASHBOARD}`, { replace: true });
+            navigate(`/`, { replace: true });
         },
         onError: () => {
             toast.error(PAGES.LOGIN.FORM.TOASTS.WRONG_CREDENTIALS);
