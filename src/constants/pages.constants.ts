@@ -74,7 +74,10 @@ export const PAGES = {
                 "Ha ocurrido un error al obtener la actividad de las estancias",
             ERROR_UPDATE_BOOKING:
                 "Ha ocurrido un error al actualizar la reserva",
-            ERROR_DELETE_BOOKING: "Ha ocurrido un error al eliminar la reserva"
+            ERROR_DELETE_BOOKING: "Ha ocurrido un error al eliminar la reserva",
+            EXAMPLE_CREATED: "Reserva de ejemplo creada exitosamente",
+            ERROR_CREATE_EXAMPLE:
+                "Ha ocurrido un error al crear la reserva de ejemplo"
         }
     },
     ACCOUNT: {
